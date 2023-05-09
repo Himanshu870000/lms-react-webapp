@@ -9,6 +9,8 @@ import CourseDescription from './CourseDescription/CourseDescription';
 import CourseHeader from './CourseHeader/CourseHeader';
 import CourseLanding from './CourseLanding/CourseLanding';
 import Curiculum from './Curiculum/Curiculum';
+import CourseAvail from './CourseAvailablity/CourseAvail';
+import Pricing from './Pricing/Pricing';
 
 const CreateCourses = () => {
 
@@ -165,6 +167,27 @@ const CreateCourses = () => {
                             </Link>
                         </li>
 
+                        <li>
+                            <p
+                                class="flex items-center font-bold p-2 text-black rounded-lg dark:text-white " data-target="dashboard">
+                                <span class="ml-3">Course Management</span>
+                            </p>
+                        </li>
+
+                        <li>
+                            <Link onClick={() => handleMenuClick("CourseAvailablity")}
+                                class={`flex items-center text-sm p-2 rounded-lg dark:text-white hover:text-purple-500 ${activeMenu === "CourseAvailablity" ? "text-purple-500" : "text-black"}`}>
+                                <span class="flex-1 ml-3 whitespace-nowrap">Course Availablity</span>
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link onClick={() => handleMenuClick("Pricing")}
+                                class={`flex items-center text-sm p-2 rounded-lg dark:text-white hover:text-purple-500 ${activeMenu === "Pricing" ? "text-purple-500" : "text-black"}`}>
+                                <span class="flex-1 ml-3 whitespace-nowrap">Pricing</span>
+                            </Link>
+                        </li>
+
                     </ul>
                 </div>
             </aside>
@@ -183,6 +206,10 @@ const CreateCourses = () => {
                                     return <CourseLanding handleMenuClick={handleMenuClick} />;
                                 case "Curiculum":
                                     return <Curiculum handleMenuClick={handleMenuClick} />;
+                                case "CourseAvailablity":
+                                    return <CourseAvail handleMenuClick={handleMenuClick} />;
+                                case "Pricing":
+                                    return <Pricing handleMenuClick={handleMenuClick} />;
                                 default:
                                     return null;
                             }

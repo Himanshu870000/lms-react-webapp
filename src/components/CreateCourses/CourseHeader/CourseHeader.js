@@ -8,6 +8,7 @@ import imageIcon from '../../../assets/videoIcon.png'
 
 
 const languages = [
+    { code: 'hi', name: 'Hindi' },
     { code: 'en', name: 'English' },
     { code: 'fr', name: 'French' },
     { code: 'es', name: 'Spanish' },
@@ -25,6 +26,8 @@ const CourseHeader = ({ handleMenuClick }, props) => {
         handleMenuClick("CourseLanding");
     };
     const [selectedCategory, setSelectedCategory] = useState(null)
+    const [courseTitle, setCourseTitle] = useState('');
+
 
     function handleCategorySelect(category) {
         setSelectedCategory(category)
@@ -46,14 +49,22 @@ const CourseHeader = ({ handleMenuClick }, props) => {
         setIsOpen(false); // close the menu when a language is selected
     };
 
+
     const [image, setImage] = useState(null);
 
     const handleImageChange = (event) => {
         setImage(URL.createObjectURL(event.target.files[0]));
     };
 
+    
+    console.log('courseTitle', courseTitle)
+    console.log("selectedCategory---->", selectedCategory)
+    console.log("selectedLevel---->", selectedLevel)
+    console.log("selectedLanguage---->", selectedLanguage)
+    console.log('Image---->', image)
 
-    console.log('props---->', props)
+
+    // console.log('props---->', props)
 
     return (
 
@@ -201,9 +212,9 @@ const CourseHeader = ({ handleMenuClick }, props) => {
                 <input
                     className="p-2.5 outline-none appearance-none text-gray-500 bg-white border rounded-md shadow-sm focus:border-gray-600"
                     style={{ width: '130%' }}
-                    placeholder="Type your text here (maximum 60 words)"
-                // maxLength={100}
-                // rows={5}
+                    placeholder="Enter your course title here..."
+                    value={courseTitle}
+                    onChange={(event) => setCourseTitle(event.target.value)}
                 ></input>
             </div>
 

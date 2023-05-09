@@ -13,13 +13,18 @@ import Announcement from './Announcement/Announcement';
 import DropIcon from '../../assets/dropDownIcon.png'
 
 
-const HomePage = () => {
+const HomePage = (props) => {
 
     // const [showMenu, setShowMenu] = useState(false);
 
     // const toggleMenu = () => {
     //     setShowMenu(!showMenu);
     // };
+
+    const { token } = props;
+
+    console.log('token---->', token)
+
 
     const [isOpen, setIsOpen] = useState(false);
 

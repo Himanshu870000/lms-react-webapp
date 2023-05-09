@@ -23,6 +23,8 @@ import CourseHeader from './components/CreateCourses/CourseHeader/CourseHeader';
 import CourseLanding from './components/CreateCourses/CourseLanding/CourseLanding';
 import Curiculum from './components/CreateCourses/Curiculum/Curiculum';
 import DemoVideo from './components/CreateCourses/DemoVideo/DemoVideo';
+import CourseAvail from './components/CreateCourses/CourseAvailablity/CourseAvail';
+import Pricing from './components/CreateCourses/Pricing/Pricing';
 
 const App = () => {
   return (
@@ -48,6 +50,8 @@ const App = () => {
           <Route path='CourseLanding' element={<CourseLanding/>}/>
           <Route path='Curiculum' element={<Curiculum/>}/>
           <Route path='DemoVideo' element={<DemoVideo/>}/>
+          <Route path='CourseAvailablity' element={<CourseAvail/>}/>
+          <Route path='Pricing' element={<Pricing/>}/>
         </Route>
       </Routes>
     </Router>

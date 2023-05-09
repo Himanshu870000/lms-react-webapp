@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import loginBack from '../../assets/loginBack.png'
 import Logo from '../../assets/logo.png'
 import google from '../../assets/google.png'
 import facebook from '../../assets/signUpFacebook.png'
 import axios from 'axios'
 import swal from 'sweetalert'
+import HomePage from '../User/User'
+
 
 
 
@@ -15,8 +17,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [redirectToHome, setRedirectToHome] = useState(false); // Initialize to false
 
-
-
+  
   const handleLogin = async () => {
     // Check if any input fields are empty
     if (!email || !password) {
@@ -26,17 +27,17 @@ export default function Login() {
       });
       return;
     }
-
+  
     try {
-      const response = await axios.post('http://192.168.1.116:7000/api/signin', {
+      const response = await axios.post('http://192.168.0.168:7000/api/signin', {
         email: email,
         password: password,
       });
       console.log('ressss', response.data);
-
+  
       // Save the JWT token from the response to local storage or cookies
       localStorage.setItem('token', response.data.token);
-
+  
       swal({
         title: 'Login successful!',
         icon: 'success',
@@ -54,11 +55,13 @@ export default function Login() {
       });
     }
   };
-
+  
   if (redirectToHome) {
     console.log('Redirecting to home page...');
-    return <Navigate to="/HomePage" />;
+    const token = localStorage.getItem('token');
+    return <HomePage token={token} />;
   }
+  
 
 
 

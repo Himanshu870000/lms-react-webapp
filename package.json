@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@u-wave/react-vimeo": "^0.9.10",
     "axios": "^1.4.0",
+    "react-datepicker": "^4.11.0",
     "react-dom": "^18.2.0",
     "react-draft-wysiwyg": "^1.15.0",
     "react-router-dom": "^6.10.0",
