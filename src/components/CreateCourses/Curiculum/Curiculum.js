@@ -28,20 +28,8 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
         setShowForm(false);
     };
 
-    // const [showForm1, setShowForm1] = useState(false);
-
-    const handleClick1 = () => {
-        // setShowForm1(true);
-    };
-
-    // const handleClose1 = () => {
-    //     setShowForm1(false);
-    // };
-
-
 
     const [formHeight, setFormHeight] = useState(96);
-
     const [saveSectionName, setSaveSectionName] = useState(false);
     const [isEditingName, setIsEditingName] = useState(false);
     const [selectType, setSelectType] = useState(false);
@@ -83,7 +71,6 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
         setSaveNote(false)
 
     }
-
 
 
     const inputRef = useRef(null);
@@ -190,7 +177,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
         }
     };
 
-    console.log('videoId--->', videoIds[0])
+    // console.log('videoId--->', videoIds[0])
 
 
     const handleNoteClick = () => {
@@ -215,21 +202,38 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
         setIsEditingName(true);
     };
 
+    // const [sectionData, setSectionData] = useState([]);
+
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+
+    //     const newSection = {
+    //         title: event.target.title.value,
+    //         description: event.target.description.value,
+    //         videos: [
+    //             {
+    //                 videoId: event.target.videoId.value,
+    //                 videoTitle: event.target.videoTitle.value,
+    //                 videoType: event.target.videoType.value,
+    //             },
+    //         ],
+    //         assignment: event.target.assignment.value,
+    //     };
+
+    //     setSectionData([...sectionData, newSection]);
+    //     setShowForm(false);
+    // };
+
     const handleDeleteClick = () => {
         // Do something when Delete button is clicked
     };
 
-    // function handleNameChange(event) {
-    //     setSaveSectionName(event.target.value);
-    // }
 
     const buttonClick = () => {
         handleMenuClick("CourseDescription")
         handleCourseSectionChange()
 
     }
-
-    console.log('saveSectionName------>', saveSectionName)
 
 
 
@@ -532,7 +536,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                                                 className="h-10 w-32 shadow-md bg-slate-900 hover:opacity-50 border-x-2 rounded-md"
                                                 onClick={handleVideoLinkChange}>
                                                 <p className='text-white'>Add</p>
-                                                </button>
+                                            </button>
 
                                         </div>
 
@@ -560,7 +564,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                                                 className="h-10 w-32 shadow-md bg-slate-900 hover:opacity-50 border-x-2 rounded-md"
                                                 onClick={handleVideoLinkChange}>
                                                 <p className='text-white'>Add</p>
-                                                </button>
+                                            </button>
                                         </div>
 
 
@@ -589,9 +593,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
 
                                 {!saveSectionName && (
                                     <div className="relative">
-                                        {/* parent container with relative position */}
                                         <div className="flex justify-end absolute top-8 right-12">
-                                            {/* buttons with absolute position */}
                                             <button
                                                 onClick={cancelClickHandler}
                                                 className="h-10 w-32 shadow-md mr-5 border-x-2 border-y-2 hover:opacity-50 rounded-md"
@@ -627,19 +629,6 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                 )}
             </div>
 
-
-
-
-            {saveSectionName && showForm && (
-                <button
-                    className="flex mt-32 items-center justify-center hover:opacity-50 shadow-md rounded-lg h-14 w-40 border-y-2 border-x-2"
-                    onClick={handleClick1}
-                >
-                    <p className="text-gray-700 text-xl font-medium">
-                        <span className="mr-3 mt-2 text-4xl">+</span>Section
-                    </p>
-                </button>
-            )}
 
             <div className="flex justify-end mt-20 mb-36" style={{ width: '130%' }}>
                 <button
