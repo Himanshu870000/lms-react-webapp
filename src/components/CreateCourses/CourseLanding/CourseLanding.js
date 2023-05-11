@@ -6,19 +6,23 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState } from "draft-js";
 
 
-const CourseLanding = ({handleMenuClick}) => {
+const CourseLanding = ({handleMenuClick,handleCourseDescriptionChange}) => {
 
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-    const handleEditorStateChange = (state) => {
-        setEditorState(state);
-    };
+  const handleEditorStateChange = (editorState) => {
+    setEditorState(editorState);
+  };
 
-    const buttonClick = ()=>{
-        handleMenuClick("CourseDescription")
-    }
+  
+    const description = editorState.getCurrentContent().getPlainText();
+  
 
-    
+  const buttonClick = () => {
+    handleMenuClick('CourseDescription');
+    handleCourseDescriptionChange(description);
+  };
+
 
     return (
         <div className=' justify-center justify-items-center'>

@@ -14,6 +14,8 @@ const Price = [
     { code: 'za', name: '1199' },
 ];
 
+
+
 const Currency = [
     { code: 'in', name: 'INR' },
     { code: 'us', name: 'USD' },
@@ -26,7 +28,7 @@ const Currency = [
 
 
 
-const Pricing = () => {
+const Pricing = ({handleCourseCurrencyChange,handleCoursePriceChange}) => {
     const [selectedCurrency, setSelectedCurrency] = useState(Currency[0]);
     const [isOpen, setIsOpen] = useState(false); // add isOpen state
 
@@ -46,7 +48,8 @@ const Pricing = () => {
     };
 
     const buttonClick = () =>{
-
+        handleCourseCurrencyChange(selectedCurrency)
+        handleCoursePriceChange(selectedPrice)
     }
 
     return (

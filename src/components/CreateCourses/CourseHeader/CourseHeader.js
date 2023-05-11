@@ -20,11 +20,8 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-const CourseHeader = ({ handleMenuClick }, props) => {
+const CourseHeader = ({ handleCourseCategoryChange, handleCourseImageChange, handleCourseTitleChange, handleCourseLevelChange, handleCourseLanguageChange, handleMenuClick }, props) => {
 
-    const buttonClick = () => {
-        handleMenuClick("CourseLanding");
-    };
     const [selectedCategory, setSelectedCategory] = useState(null)
     const [courseTitle, setCourseTitle] = useState('');
 
@@ -32,6 +29,7 @@ const CourseHeader = ({ handleMenuClick }, props) => {
     function handleCategorySelect(category) {
         setSelectedCategory(category)
     }
+
 
     const [selectedLevel, setSelectedLevel] = useState(null)
 
@@ -56,12 +54,21 @@ const CourseHeader = ({ handleMenuClick }, props) => {
         setImage(URL.createObjectURL(event.target.files[0]));
     };
 
-    
-    console.log('courseTitle', courseTitle)
-    console.log("selectedCategory---->", selectedCategory)
-    console.log("selectedLevel---->", selectedLevel)
-    console.log("selectedLanguage---->", selectedLanguage)
-    console.log('Image---->', image)
+
+    const buttonClick = () => {
+        handleMenuClick("CourseLanding");
+        handleCourseCategoryChange(selectedCategory)
+        handleCourseTitleChange(courseTitle)
+        handleCourseLevelChange(selectedLevel)
+        handleCourseLanguageChange(selectedLanguage)
+        handleCourseImageChange(image)
+    };
+
+    // console.log('courseTitle', courseTitle)
+    // console.log("selectedCategory---->", selectedCategory)
+    // console.log("selectedLevel---->", selectedLevel)
+    // console.log("selectedLanguage---->", selectedLanguage)
+    // console.log('Image---->', image)
 
 
     // console.log('props---->', props)

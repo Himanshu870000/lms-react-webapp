@@ -13,11 +13,10 @@ import live from '../../../assets/live.png'
 
 
 
-const Curiculum = ({ handleMenuClick }) => {
+const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
 
-    const buttonClick = () => {
-        handleMenuClick("CourseDescription")
-    }
+
+    // console.log('handleCourseSectionChange--->',handleCourseSectionChange)
 
     const [showForm, setShowForm] = useState(false);
 
@@ -160,6 +159,40 @@ const Curiculum = ({ handleMenuClick }) => {
 
     }
 
+
+    const [youtubeInput, setYoutubeInput] = useState('');
+    const [vimeoInput, setVimeoInput] = useState('');
+    const [videoIds, setVideoIds] = useState([]);
+
+    const handleYoutubeInputChange = (event) => {
+        setYoutubeInput(event.target.value);
+    };
+
+    const handleVimeoInputChange = (event) => {
+        setVimeoInput(event.target.value);
+    };
+
+    const handleVideoLinkChange = (event) => {
+        event.preventDefault();
+        const inputVal = event.target.value;
+        const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/;
+        const vimeoRegex = /https?:\/\/(?:www\.)?vimeo\.com\/(\d+)/;
+        let videoId = '';
+
+        if (inputVal.match(youtubeRegex)) {
+            videoId = inputVal.match(youtubeRegex)[1];
+        } else if (inputVal.match(vimeoRegex)) {
+            videoId = inputVal.match(vimeoRegex)[1];
+        }
+
+        if (videoId) {
+            setVideoIds((prevVideoIds) => [...prevVideoIds, videoId]);
+        }
+    };
+
+    console.log('videoId--->', videoIds[0])
+
+
     const handleNoteClick = () => {
         setSelectType(false);
         setSaveNote(true);
@@ -189,6 +222,14 @@ const Curiculum = ({ handleMenuClick }) => {
     // function handleNameChange(event) {
     //     setSaveSectionName(event.target.value);
     // }
+
+    const buttonClick = () => {
+        handleMenuClick("CourseDescription")
+        handleCourseSectionChange()
+
+    }
+
+    console.log('saveSectionName------>', saveSectionName)
 
 
 
@@ -242,7 +283,7 @@ const Curiculum = ({ handleMenuClick }) => {
                                 />
                             </svg>
                         </button>
-                        
+
 
                         <form className="mt-5 border-solid">
                             <div className={`border-y-2 bg-gray-200 mt-8 rounded-lg border-x-2 h-${formHeight}`} style={{ width: '130%' }}>
@@ -476,19 +517,29 @@ const Curiculum = ({ handleMenuClick }) => {
                                             </p>
                                         </div>
 
-                                        <div className='mt-2'>
+
+
+
+                                        <div className='mt-2 flex flex-row'>
                                             <input
                                                 className="p-2 ml-10 outline-none appearance-none text-gray-500 bg-white border rounded-md shadow-sm focus:border-gray-600"
-                                                style={{ width: '86%' }}
+                                                style={{ width: '70%' }}
                                                 placeholder="https://www.youtube.com/watch?"
-                                            // maxLength={100}
-                                            // rows={5}
+                                                value={youtubeInput}
+                                                onChange={handleYoutubeInputChange}
                                             ></input>
+                                            <button
+                                                className="h-10 w-32 shadow-md bg-slate-900 hover:opacity-50 border-x-2 rounded-md"
+                                                onClick={handleVideoLinkChange}>
+                                                <p className='text-white'>Add</p>
+                                                </button>
+
                                         </div>
 
                                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} className=''>
                                             <p className='text-black absolute font-bold text-xl mt-12 ml-5'>OR</p>
                                         </div>
+
 
 
                                         <div className='mt-5 ml-10'>
@@ -497,14 +548,19 @@ const Curiculum = ({ handleMenuClick }) => {
                                             </p>
                                         </div>
 
-                                        <div className='mt-2 mb-3'>
+                                        <div className='mt-2 mb-3 flex flex-row'>
                                             <input
                                                 className="p-2 ml-10 outline-none appearance-none text-gray-500 bg-white border rounded-md shadow-sm focus:border-gray-600"
-                                                style={{ width: '86%' }}
+                                                style={{ width: '70%' }}
                                                 placeholder="https://vimeo.com/812393638"
-                                            // maxLength={100}
-                                            // rows={5}
+                                                value={vimeoInput}
+                                                onChange={handleVimeoInputChange}
                                             ></input>
+                                            <button
+                                                className="h-10 w-32 shadow-md bg-slate-900 hover:opacity-50 border-x-2 rounded-md"
+                                                onClick={handleVideoLinkChange}>
+                                                <p className='text-white'>Add</p>
+                                                </button>
                                         </div>
 
 
@@ -571,19 +627,19 @@ const Curiculum = ({ handleMenuClick }) => {
                 )}
             </div>
 
-      
 
 
-               { saveSectionName && showForm && (
-                    <button
-                        className="flex mt-32 items-center justify-center hover:opacity-50 shadow-md rounded-lg h-14 w-40 border-y-2 border-x-2"
-                        onClick={handleClick1}
-                    >
-                        <p className="text-gray-700 text-xl font-medium">
-                            <span className="mr-3 mt-2 text-4xl">+</span>Section
-                        </p>
-                    </button>
-                )}
+
+            {saveSectionName && showForm && (
+                <button
+                    className="flex mt-32 items-center justify-center hover:opacity-50 shadow-md rounded-lg h-14 w-40 border-y-2 border-x-2"
+                    onClick={handleClick1}
+                >
+                    <p className="text-gray-700 text-xl font-medium">
+                        <span className="mr-3 mt-2 text-4xl">+</span>Section
+                    </p>
+                </button>
+            )}
 
             <div className="flex justify-end mt-20 mb-36" style={{ width: '130%' }}>
                 <button

@@ -14,12 +14,6 @@ import Pricing from './Pricing/Pricing';
 
 const CreateCourses = () => {
 
-    // const [showMenu, setShowMenu] = useState(false);
-
-    // const toggleMenu = () => {
-    //     setShowMenu(!showMenu);
-    // };
-
     const [isOpen, setIsOpen] = useState(false);
 
     function toggleDropdown() {
@@ -32,6 +26,111 @@ const CreateCourses = () => {
         setActiveMenu(menu);
     };
 
+
+    const [courseData, setCourseData] = useState({
+
+        courseCategory: "",
+        courseTitle: "",
+        courseLevel: "",
+        courseLanguage: "",
+        courseImage: "",
+        courseDescription: "",
+        courseDemoVideo: "",
+        courseStartDate:"",
+        courseEndDate:"",
+        CourseEnrollDeadline:"",
+        courseCurrency: "",
+        coursePrice: "",
+        courseSection: [
+            {
+
+            title:"",
+            description:"",
+            videos:[
+                {
+                    videoId:"",
+                    videoTitle:"",
+                    videoType:"",
+                }
+
+            ],
+
+            assignment:"",
+
+            }
+
+        ],
+    });
+
+    console.log('courseData---->', courseData)
+
+    const handleCourseCategoryChange = (Category) => {
+        setCourseData((prevData) => ({ ...prevData, courseCategory: Category }));
+    };
+
+
+    const handleCourseTitleChange = (title) => {
+        setCourseData((prevData) => ({ ...prevData, courseTitle: title }));
+    };
+
+    const handleCourseLevelChange = (Level) => {
+        setCourseData((prevData) => ({ ...prevData, courseLevel: Level }));
+    };
+
+    const handleCourseLanguageChange = (Language) => {
+        setCourseData((prevData) => ({ ...prevData, courseLanguage: Language }));
+    };
+
+
+    const handleCourseImageChange = (image) => {
+        setCourseData((prevData) => ({ ...prevData, courseImage: image }));
+    };
+
+    const handleCourseDescriptionChange = (Description) => {
+        setCourseData((prevData) => ({ ...prevData, courseDescription: Description }));
+    };
+
+
+    const handleCourseDemoVideoChange = (DemoVideo) => {
+        setCourseData((prevData) => ({ ...prevData, courseDemoVideo: DemoVideo }));
+    };
+
+  
+
+    const handleCourseSectionChange = (index, key, value) => {
+        setCourseData((prevData) => {
+          const courseSection = [...prevData.courseSection];
+          courseSection[index][key] = value;
+          return {
+            ...prevData,
+            courseSection,
+          };
+        });
+      };
+    
+    
+    
+    const handleCourseStartDateChange = (StartDate) => {
+        setCourseData((prevData) => ({ ...prevData, courseStartDate: StartDate }));
+    };
+
+
+    const handleCourseEndDateChange = (EndDate) => {
+        setCourseData((prevData) => ({ ...prevData, courseEndDate: EndDate }));
+    };
+
+    const handleCourseEnrollDeadlineChange = (EnrollDeadline) => {
+        setCourseData((prevData) => ({ ...prevData, CourseEnrollDeadline: EnrollDeadline }));
+    };
+
+
+    const handleCourseCurrencyChange = (Currency) => {
+        setCourseData((prevData) => ({ ...prevData, courseCurrency: Currency }));
+    };
+
+    const handleCoursePriceChange = (Price) => {
+        setCourseData((prevData) => ({ ...prevData, coursePrice: Price }));
+    };
 
 
     return (
@@ -196,24 +295,51 @@ const CreateCourses = () => {
                 <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
 
                     <div className="w-3/4">
+
                         {(() => {
                             switch (activeMenu) {
                                 case "CourseDescription":
-                                    return <CourseDescription handleMenuClick={handleMenuClick} />;
+                                    return <CourseDescription
+                                        handleMenuClick={handleMenuClick}
+                                        handleCourseDemoVideoChange={handleCourseDemoVideoChange}
+                                    />;
                                 case "CourseHeader":
-                                    return <CourseHeader handleMenuClick={handleMenuClick} />;
+                                    return <CourseHeader
+                                        handleMenuClick={handleMenuClick}
+                                        handleCourseCategoryChange={handleCourseCategoryChange}
+                                        handleCourseTitleChange={handleCourseTitleChange}
+                                        handleCourseLevelChange={handleCourseLevelChange}
+                                        handleCourseLanguageChange={handleCourseLanguageChange}
+                                        handleCourseImageChange={handleCourseImageChange}
+                                    />;
                                 case "CourseLanding":
-                                    return <CourseLanding handleMenuClick={handleMenuClick} />;
+                                    return <CourseLanding
+                                        handleMenuClick={handleMenuClick}
+                                        handleCourseDescriptionChange={handleCourseDescriptionChange}
+                                    />;
                                 case "Curiculum":
-                                    return <Curiculum handleMenuClick={handleMenuClick} />;
+                                    return <Curiculum
+                                        handleMenuClick={handleMenuClick}
+                                        handleCourseSectionChange={handleCourseSectionChange}
+                                    />;
                                 case "CourseAvailablity":
-                                    return <CourseAvail handleMenuClick={handleMenuClick} />;
+                                    return <CourseAvail
+                                     handleMenuClick={handleMenuClick}
+                                     handleCourseStartDateChange={handleCourseStartDateChange}
+                                     handleCourseEndDateChange={handleCourseEndDateChange}
+                                     handleCourseEnrollDeadlineChange={handleCourseEnrollDeadlineChange}
+                                      />;
                                 case "Pricing":
-                                    return <Pricing handleMenuClick={handleMenuClick} />;
+                                    return <Pricing 
+                                    handleMenuClick={handleMenuClick}
+                                    handleCourseCurrencyChange={handleCourseCurrencyChange}
+                                    handleCoursePriceChange={handleCoursePriceChange}
+                                     />;
                                 default:
                                     return null;
                             }
                         })()}
+
                     </div>
 
                 </div>

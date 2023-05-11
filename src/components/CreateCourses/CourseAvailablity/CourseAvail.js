@@ -4,15 +4,20 @@ import backArrow from '../../../assets/arrow-narrow-left.png'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const CourseAvail = () => {
+const CourseAvail = ({handleMenuClick, handleCourseStartDateChange, handleCourseEndDateChange, handleCourseEnrollDeadlineChange }) => {
 
     const [selectStartDate, setSelectStartDate] = useState(null);
     const [selectEndDate, setSelectEndDate] = useState(null);
     const [selectEnrollDeadline, setselectEnrollDeadline] = useState(null);
 
-    const buttonClick  = () =>{
-        
-    } 
+
+
+    const buttonClick = () => {
+        handleMenuClick('Pricing')
+        handleCourseStartDateChange(selectStartDate)
+        handleCourseEndDateChange(selectEndDate)
+        handleCourseEnrollDeadlineChange(selectEnrollDeadline)
+    }
 
     return (
         <div>
