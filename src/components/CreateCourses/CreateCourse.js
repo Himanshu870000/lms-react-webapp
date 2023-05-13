@@ -36,33 +36,38 @@ const CreateCourses = () => {
         courseImage: "",
         courseDescription: "",
         courseDemoVideo: "",
-        courseStartDate:"",
-        courseEndDate:"",
-        CourseEnrollDeadline:"",
+        courseStartDate: "",
+        courseEndDate: "",
+        CourseEnrollDeadline: "",
         courseCurrency: "",
         coursePrice: "",
         courseSection: [
             {
+                title: "",
+                description: "",
+                lecture: [
+                    {
 
-            title:"",
-            description:"",
-            videos:[
-                {
-                    videoId:"",
-                    videoTitle:"",
-                    videoType:"",
-                }
+                        lectureTitle: '',
+                        lectureNotes: '',
 
-            ],
-
-            assignment:"",
-
-            
+                    }
+                ],
+                videos: [
+                    {
+                        videoId: "",
+                        videoTitle: "",
+                        videoType: "",
+                    }
+                ],
+                assignment: "",
 
             }
 
         ],
     });
+
+
 
     console.log('courseData---->', courseData)
 
@@ -97,21 +102,21 @@ const CreateCourses = () => {
         setCourseData((prevData) => ({ ...prevData, courseDemoVideo: DemoVideo }));
     };
 
-  
+
 
     const handleCourseSectionChange = (index, key, value) => {
         setCourseData((prevData) => {
-          const courseSection = [...prevData.courseSection];
-          courseSection[index][key] = value;
-          return {
-            ...prevData,
-            courseSection,
-          };
+            const courseSection = [...prevData.courseSection];
+            courseSection[index][key] = value;
+            return {
+                ...prevData,
+                courseSection,
+            };
         });
-      };
-    
-    
-    
+    };
+
+
+
     const handleCourseStartDateChange = (StartDate) => {
         setCourseData((prevData) => ({ ...prevData, courseStartDate: StartDate }));
     };
@@ -326,17 +331,17 @@ const CreateCourses = () => {
                                     />;
                                 case "CourseAvailablity":
                                     return <CourseAvail
-                                     handleMenuClick={handleMenuClick}
-                                     handleCourseStartDateChange={handleCourseStartDateChange}
-                                     handleCourseEndDateChange={handleCourseEndDateChange}
-                                     handleCourseEnrollDeadlineChange={handleCourseEnrollDeadlineChange}
-                                      />;
+                                        handleMenuClick={handleMenuClick}
+                                        handleCourseStartDateChange={handleCourseStartDateChange}
+                                        handleCourseEndDateChange={handleCourseEndDateChange}
+                                        handleCourseEnrollDeadlineChange={handleCourseEnrollDeadlineChange}
+                                    />;
                                 case "Pricing":
-                                    return <Pricing 
-                                    handleMenuClick={handleMenuClick}
-                                    handleCourseCurrencyChange={handleCourseCurrencyChange}
-                                    handleCoursePriceChange={handleCoursePriceChange}
-                                     />;
+                                    return <Pricing
+                                        handleMenuClick={handleMenuClick}
+                                        handleCourseCurrencyChange={handleCourseCurrencyChange}
+                                        handleCoursePriceChange={handleCoursePriceChange}
+                                    />;
                                 default:
                                     return null;
                             }

@@ -11,16 +11,14 @@ import live from '../../../assets/live.png'
 
 
 
-
-
 const Curiculum = ({ handleMenuClick, handleCourseSectionChange, onAddSection }) => {
 
 
     const [showForm, setShowForm] = useState(false);
-    const [sectionData, setSectionData] = useState([]);
+    const [sectionData,] = useState([]);
     const [courseTitle, setCourseTitle] = useState('');
     const [lectureNotesList, setLectureNotesList] = useState([]);
-    const [lectureNotes, setLectureNotes] = useState('')
+    const [, setLectureNotes] = useState('')
     const [lectureTitle, setLectureTitle] = useState('')
 
     // const [videoID, setVideoId] = useState('');
@@ -36,8 +34,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange, onAddSection })
         setShowForm(true);
         setCourseTitle('');
 
-        setCourseTitle(sectionData[sectionData.length + 1] || ''); 
-      
+        setCourseTitle(sectionData[sectionData.length + 1] || '');
 
     };
 
@@ -47,14 +44,53 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange, onAddSection })
     };
 
 
-    const saveClickHandler = () => {
-        const newSectionData = [...sectionData, courseTitle];
-        setSectionData(newSectionData);
-        setShowForm(false);
+
+
+
+    const [courseSectionData, setCourseSectionData] = useState([])
+    const SectionsaveClickHandler = () => {
+        const newSection = {
+            title: courseTitle,
+            description: '',
+            lectureNotesList: lectureNotesList,
+            videos: [
+                {
+                    videoId: '',
+                    videoTitle: '',
+                    videoType: '',
+                },
+            ],
+            assignment: '',
+        };
+
+        setCourseSectionData((prevData) => {
+            const newData = [...prevData, newSection];
+            const sectionCount = newData.length;
+
+            // Empty lecture notes of the current section
+            newData[sectionCount - 1].lectureNotesList = [];
+
+            return newData;
+        });
+
         setCourseTitle('');
+        setShowForm(false);
+        setShowAddLectureButton(true);
+    };
 
-        setShowAddLectureButton(true)
+    const lectureSaveButton = (sectionIndex) => {
+        const newLecture = {
+            lectureTitle,
+            lectureNotes: '',
+            sectionIndex, // Add sectionIndex to the lecture object
+        };
 
+        setLectureNotesList((prevList) => [...prevList, newLecture]);
+        setLectureTitle('');
+        setShowAddedLectureNotes(sectionIndex);
+        setShowAddLectureForm(false);
+        setShowAddLectureButton(true);
+        setShowSelectType(false);
     };
 
 
@@ -67,6 +103,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange, onAddSection })
             if (event.keyCode === 13) {
                 event.preventDefault();
                 saveButtonRef.current.click();
+                lecturesaveButtonRef.current.click();
             }
         }
 
@@ -88,17 +125,6 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange, onAddSection })
         setShowAddLectureForm(true)
         setShowSelectType(false)
         setShowAddLectureButton(false)
-
-    }
-
-    const lectureSaveButton = () => {
-        setShowAddedLectureNotes(true)
-        setShowAddLectureForm(false)
-        setShowAddLectureButton(true)
-        setShowSelectType(false);
-
-        const newLectureNotesList = [...lectureNotesList, { lectureTitle, lectureNotes }];
-        setLectureNotesList(newLectureNotesList);
         setLectureTitle('');
         setLectureNotes('');
 
@@ -144,39 +170,42 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange, onAddSection })
                 </p>
             </div>
 
+
             <div className="flex flex-col h-full mt-10">
-                {sectionData.map((section, index) => (
-                    <div className="h-full rounded-lg mb-10 p-2 bg-slate-300" style={{ width: '130%' }} key={index}>
+                {courseSectionData.map((section, sectionIndex) => (
+                    <div className="h-full rounded-lg mb-10 p-2 bg-slate-300" style={{ width: '130%' }} key={`section${sectionIndex}`}>
                         <div className="mt-5 flex flex-row">
-                            <p className="text-black text-lg font-medium ml-10">{`Section ${index + 1}:`}</p>
-                            <p className="text-black text-lg font-medium ml-10">{section}</p>
+                            <p className="text-black text-lg font-medium ml-10">{`Section ${sectionIndex + 1}:`}</p>
+                            <p className="text-black text-lg font-medium ml-10">{section.title}</p>
                             <div className="flex flex-row ml-auto self-end">
                                 <button className="">
                                     <img className="mr-5" src={EditIcon} alt="" />
                                 </button>
                                 <button className="mr-5">
-                                    <img className="" src={deleteIcon} alt="" />  
+                                    <img className="" src={deleteIcon} alt="" />
                                 </button>
                             </div>
                         </div>
 
-
-                        {showAddedLectureNotes && lectureNotesList.map((lecture, index) => (
-                            <div className="flex flex-row h-12 ml-10 mt-5 py-3 rounded-lg bg-white" style={{ width: "85%" }} key={index}>
-                                <p className="ml-10 text-black font-medium">{`Lecture ${index + 1}: `}</p>
-                                <img className="p-1 ml-5" src={NoteIcon} alt="" />
-                                <Link className="font-medium hover:opacity-50 text-purple-500 underline">{lecture.lectureTitle}</Link>
-                                <div className="flex flex-row ml-auto self-end">
-                                    <button className="">
-                                        <img className="mr-5" src={EditIcon} alt="" />
-                                    </button>
-                                    <button className="mr-5">
-                                        <img className="" src={deleteIcon} alt="" />
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-
+                        {showAddedLectureNotes && (
+                            lectureNotesList
+                                .filter((lecture) => lecture.sectionIndex === sectionIndex) // Filter by sectionIndex
+                                .map((lecture, lectureIndex) => (
+                                    <div className="flex flex-row h-12 ml-10 mt-5 py-3 rounded-lg bg-white" style={{ width: '85%' }} key={`Lecture${lectureIndex}`}>
+                                        <p className="ml-10 text-black font-medium">{`Lecture ${lectureIndex + 1}: `}</p>
+                                        <img className="p-1 ml-5" src={NoteIcon} alt="" />
+                                        <Link className="font-medium hover:opacity-50 text-purple-500 underline">{lecture.lectureTitle}</Link>
+                                        <div className="flex flex-row ml-auto self-end">
+                                            <button className="">
+                                                <img className="mr-5" src={EditIcon} alt="" />
+                                            </button>
+                                            <button className="mr-5">
+                                                <img className="" src={deleteIcon} alt="" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                        )}
 
 
 
@@ -277,7 +306,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange, onAddSection })
                                     </button>
                                     <button
                                         ref={lecturesaveButtonRef}
-                                        onClick={lectureSaveButton}
+                                        onClick={() => lectureSaveButton(sectionIndex)}
                                         className="h-10 w-32 shadow-md bg-slate-900 hover:opacity-50 border-x-2 rounded-md"
                                     >
                                         <p className="text-white text-base font-normal">Save</p>
@@ -315,7 +344,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange, onAddSection })
                             </button>
                             <button
                                 ref={saveButtonRef}
-                                onClick={saveClickHandler}
+                                onClick={SectionsaveClickHandler}
                                 className="h-10 w-32 shadow-md bg-slate-900 hover:opacity-50 border-x-2 rounded-md"
                             >
                                 <p className="text-white text-base font-normal">Save</p>
