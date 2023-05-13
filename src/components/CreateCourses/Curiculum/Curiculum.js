@@ -187,25 +187,25 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange, onAddSection })
                             </div>
                         </div>
 
-                        {showAddedLectureNotes && (
-                            lectureNotesList
-                                .filter((lecture) => lecture.sectionIndex === sectionIndex) // Filter by sectionIndex
-                                .map((lecture, lectureIndex) => (
-                                    <div className="flex flex-row h-12 ml-10 mt-5 py-3 rounded-lg bg-white" style={{ width: '85%' }} key={`Lecture${lectureIndex}`}>
-                                        <p className="ml-10 text-black font-medium">{`Lecture ${lectureIndex + 1}: `}</p>
-                                        <img className="p-1 ml-5" src={NoteIcon} alt="" />
-                                        <Link className="font-medium hover:opacity-50 text-purple-500 underline">{lecture.lectureTitle}</Link>
-                                        <div className="flex flex-row ml-auto self-end">
-                                            <button className="">
-                                                <img className="mr-5" src={EditIcon} alt="" />
-                                            </button>
-                                            <button className="mr-5">
-                                                <img className="" src={deleteIcon} alt="" />
-                                            </button>
-                                        </div>
+                        {lectureNotesList
+                            .filter((lecture) => lecture.sectionIndex === sectionIndex) // Filter by sectionIndex
+                            .map((lecture, lectureIndex) => (
+                                <div className="flex flex-row h-12 ml-10 mt-5 py-3 rounded-lg bg-white" style={{ width: '85%' }} key={`Lecture${lectureIndex}`}>
+                                    <p className="ml-10 text-black font-medium">{`Lecture ${lectureIndex + 1}: `}</p>
+                                    <img className="p-1 ml-5" src={NoteIcon} alt="" />
+                                    <Link className="font-medium hover:opacity-50 text-purple-500 underline">{lecture.lectureTitle}</Link>
+                                    <div className="flex flex-row ml-auto self-end">
+                                        <button className="">
+                                            <img className="mr-5" src={EditIcon} alt="" />
+                                        </button>
+                                        <button className="mr-5">
+                                            <img className="" src={deleteIcon} alt="" />
+                                        </button>
                                     </div>
-                                ))
-                        )}
+                                </div>
+                            ))
+                        }
+
 
 
 
