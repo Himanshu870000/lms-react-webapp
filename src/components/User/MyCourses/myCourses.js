@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import courseDp from '../../../assets/instructorCourseCard.png'
 
-const MyCourses = () => {
+const MyCourses = ({courseData}) => {
 
     
+    console.log('agya Draft Me--> ', courseData)
+    console.log('courseSection ----->', courseData.courseSection)
 
-    const [selectedOption, setSelectedOption] = useState("active");
+    const [selectedOption, setSelectedOption] = useState("drafts");
+
+    const handlePublishButton = () =>{
+
+    }
 
     return (
         <div className=' justify-center justify-items-center'>
@@ -103,16 +109,16 @@ const MyCourses = () => {
 
                         <div className='grid grid-cols-3 rounded-lg h-32  mt-4' style={{ width: '130%' }}>
                             <div className='flex flex-row py-2 text-black text-sm font-medium' style={{ gridColumn: '1/2' }}>
-                                <img className='w-20 h-20' src={courseDp} alt='' />
+                                <img className='w-20 h-20' src={courseData.courseImage} alt='' />
                                 <div className='flex flex-col sm:p-3 ml-1 mt-2 md:p-0'>
-                                    <p className='text-black font-bold text-sm'>Competitive programming:</p>
-                                    <p className='text-black font-bold text-sm'>Ultimate guide</p>
-                                    <p className='text-black font-normal text-xs'>10 Lectures, 28 Hours</p>
+                                    <p className='text-black font-bold text-sm'>{courseData.courseTitle}</p>
+                                    <p className='text-black font-bold text-sm'>{courseData.courseLevel}</p>
+                                    <p className='text-black font-normal text-xs'>8 Lectures, 28 Hours</p>
                                 </div>
 
                             </div>
                             <div className='py-2 mr-2 text-black text-sm font-medium' style={{ gridColumn: '2/3' }}>
-                                Development
+                                {courseData.courseCategory}
                             </div>
                             <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '3/4' }}>
                                 <button className='h-10 w-20 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
@@ -122,7 +128,8 @@ const MyCourses = () => {
                                 <p className='text-black text-base font-normal'>Discard</p>
 
                                 </button>
-                                <button className='h-10 w-20 ml-1 shadow-md bg-slate-600 hover:opacity-50 rounded-sm'>
+                                <button onClick={handlePublishButton}
+                                className='h-10 w-20 ml-1 shadow-md bg-slate-600 hover:opacity-50 rounded-sm'>
                                 <p className='text-white text-base font-normal'>Publish</p>
 
                                 </button>

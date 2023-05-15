@@ -86,9 +86,9 @@ const CourseHeader = ({ handleCourseCategoryChange, handleCourseImageChange, han
                     <button className='h-10 w-32 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
                         <p className='text-black text-base font-normal'>Save As Draft</p>
                     </button>
-                    <button className='h-10 w-32 shadow-md ml-1 bg-purple-500 hover:opacity-50 border-x-2 rounded-sm'>
+                    {/* <button className='h-10 w-32 shadow-md ml-1 bg-purple-500 hover:opacity-50 border-x-2 rounded-sm'>
                         <p className='text-white text-base font-normal'>Publish</p>
-                    </button>
+                    </button> */}
                 </div>
             </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 import backArrow from '../../../assets/arrow-narrow-left.png'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 // import rupee from '../../../assets/rupee.png'
@@ -28,9 +28,11 @@ const Currency = [
 
 
 
-const Pricing = ({handleCourseCurrencyChange,handleCoursePriceChange}) => {
+const Pricing = ({handleCourseCurrencyChange,handleCoursePriceChange,courseData}) => {
     const [selectedCurrency, setSelectedCurrency] = useState(Currency[0]);
     const [isOpen, setIsOpen] = useState(false); // add isOpen state
+    const navigate = useNavigate();
+
 
     const handleCurrencySelect = (currency) => {
         setSelectedCurrency(currency);
@@ -47,10 +49,23 @@ const Pricing = ({handleCourseCurrencyChange,handleCoursePriceChange}) => {
         setIsOpens(false); // close the menu when a language is selected
     };
 
-    const buttonClick = () =>{
-        handleCourseCurrencyChange(selectedCurrency)
-        handleCoursePriceChange(selectedPrice)
-    }
+    console.log('courseData in  Pricing-->', courseData)
+    console.log('selectedCurrency--->', selectedCurrency)
+    console.log('selectedPrice----->', selectedPrice)
+
+    const buttonClick = () => {
+        // Create a new courseData object with updated fields
+        const updatedCourseData = {
+          ...courseData,
+          courseCurrency: selectedCurrency,
+          coursePrice: selectedPrice
+        };
+      
+        // Navigate to HomePage with the updated courseData
+        navigate('/homepage', { state: { courseData: updatedCourseData, activeMenu: "myCourses" } });
+      };
+      
+      
 
     return (
         <div>
@@ -64,9 +79,9 @@ const Pricing = ({handleCourseCurrencyChange,handleCoursePriceChange}) => {
                     <button className='h-10 w-32 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
                         <p className='text-black text-base font-normal'>Save As Draft</p>
                     </button>
-                    <button className='h-10 w-32 shadow-md ml-1 bg-purple-500 hover:opacity-50 border-x-2 rounded-sm'>
+                    {/* <button className='h-10 w-32 shadow-md ml-1 bg-purple-500 hover:opacity-50 border-x-2 rounded-sm'>
                         <p className='text-white text-base font-normal'>Publish</p>
-                    </button>
+                    </button> */}
                 </div>
             </div>
 

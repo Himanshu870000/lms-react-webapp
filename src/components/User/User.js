@@ -3,7 +3,7 @@ import Logo from '../../assets/logo.png'
 import dashDp from '../../assets/dashDP.png'
 import notification from '../../assets/notification.png'
 import chatIcon from '../../assets/chatIcon.png'
-import { Link } from 'react-router-dom';
+import { Link , useLocation } from 'react-router-dom';
 import Dashboard from './Dashboard/Dashboard';
 import MyCourses from './MyCourses/myCourses';
 import Revenue from './Revenue/Revenue';
@@ -25,14 +25,17 @@ const HomePage = (props) => {
 
     console.log('token---->', token)
 
-
+    const location = useLocation();
+    const courseData = location?.state?.courseData;
+    const initialActiveMenu = location?.state?.activeMenu || "dashboard";
+    const [activeMenu, setActiveMenu] = useState(initialActiveMenu);
+      console.log('agyaHomepe---->',courseData)
     const [isOpen, setIsOpen] = useState(false);
 
     function toggleDropdown() {
         setIsOpen(!isOpen);
     }
 
-    const [activeMenu, setActiveMenu] = useState("dashboard");
 
     const handleMenuClick = (menu) => {
         setActiveMenu(menu);
@@ -193,7 +196,7 @@ const HomePage = (props) => {
                         {activeMenu === "dashboard" ? (
                             <Dashboard />
                         ) : activeMenu === "myCourses" ? (
-                            <MyCourses />
+                            <MyCourses   courseData={courseData} />
                         ) : activeMenu === "Revenue" ? (
                             <Revenue />
                         ) : activeMenu === "Engagement" ? (

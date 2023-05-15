@@ -14,6 +14,7 @@ import Pricing from './Pricing/Pricing';
 
 const CreateCourses = () => {
 
+
     const [isOpen, setIsOpen] = useState(false);
 
     function toggleDropdown() {
@@ -25,6 +26,8 @@ const CreateCourses = () => {
     const handleMenuClick = (menu) => {
         setActiveMenu(menu);
     };
+
+
 
 
     const [courseData, setCourseData] = useState({
@@ -104,18 +107,28 @@ const CreateCourses = () => {
 
 
 
-    const handleCourseSectionChange = (index, key, value) => {
-        setCourseData((prevData) => {
-            const courseSection = [...prevData.courseSection];
-            courseSection[index][key] = value;
-            return {
-                ...prevData,
-                courseSection,
-            };
-        });
-    };
+    const handleCourseSectionChange = (data) => {
+        courseData.courseSection = data;
+        // setCourseData((prevData) => {
+        //   const courseSection = [...prevData.courseSection];
+        //   const updatedSection = {
+        //     ...courseSection[index],
+        //     [key]: value,
+        //   };
+        //   courseSection[index] = updatedSection;
+        //   return {
+        //     ...prevData,
+        //     courseSection,
+        //   };
+        // });
+        console.log('courseData=========>', courseData);
+      };
 
 
+
+      
+
+     
 
     const handleCourseStartDateChange = (StartDate) => {
         setCourseData((prevData) => ({ ...prevData, courseStartDate: StartDate }));
@@ -138,6 +151,7 @@ const CreateCourses = () => {
     const handleCoursePriceChange = (Price) => {
         setCourseData((prevData) => ({ ...prevData, coursePrice: Price }));
     };
+
 
 
     return (
@@ -328,6 +342,7 @@ const CreateCourses = () => {
                                     return <Curiculum
                                         handleMenuClick={handleMenuClick}
                                         handleCourseSectionChange={handleCourseSectionChange}
+                                        
                                     />;
                                 case "CourseAvailablity":
                                     return <CourseAvail
@@ -341,6 +356,8 @@ const CreateCourses = () => {
                                         handleMenuClick={handleMenuClick}
                                         handleCourseCurrencyChange={handleCourseCurrencyChange}
                                         handleCoursePriceChange={handleCoursePriceChange}
+                                        courseData={courseData} // Pass the courseData as a prop
+
                                     />;
                                 default:
                                     return null;
