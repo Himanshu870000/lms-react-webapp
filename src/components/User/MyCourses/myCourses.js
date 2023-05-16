@@ -1,18 +1,67 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import courseDp from '../../../assets/instructorCourseCard.png'
+import axios from 'axios';
 
-const MyCourses = ({courseData}) => {
-
-    
-    console.log('agya Draft Me--> ', courseData)
-    console.log('courseSection ----->', courseData.courseSection)
+const MyCourses = ({ courseData }) => {
 
     const [selectedOption, setSelectedOption] = useState("drafts");
 
-    const handlePublishButton = () =>{
 
-    }
+    const courseSection = courseData.courseSection
+    console.log(courseData.CourseEnrollDeadline)
+
+    const handlePublishButton = async () => {
+        try {
+          console.log('courseData in draft--->', courseData);
+      
+          // Iterate over the course sections
+          for (const section of courseSection) {
+            const { title, lecture, videos, assignment } = section;
+      
+            const sectionData = {
+              title,
+              description: 'section_description',
+              lecture,
+              videos,
+              assignment
+            };
+      
+            const response = await axios.post('http://192.168.0.137:7000/api/insertSection', sectionData);
+            console.log('Response:', response.data);
+            console.log('courseSectionId', response.data._id);
+      
+            // Add section ID to the section object
+            section.sectionId = response.data._id;
+          }
+      
+          const { courseTitle, courseDescription, courseImage, courseCategory, courseCurrency, courseDemoVideo, courseStartDate, courseEndDate, CourseEnrollDeadline, courseLanguage, courseLevel, coursePrice } = courseData;
+      
+          const courseDatas = {
+            courseTitle,
+            courseDescription,
+            courseImage,
+            courseCategory,
+            courseCurrency,
+            courseDemoVideo,
+            courseStartDate,
+            courseEndDate,
+            CourseEnrollDeadline,
+            courseLanguage,
+            courseLevel,
+            coursePrice,
+            courseSection
+          };
+      
+          const response = await axios.post('http://192.168.0.137:7000/api/insertCourses', courseDatas);
+          console.log('Response:', response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      
+
+
 
     return (
         <div className=' justify-center justify-items-center'>
@@ -118,19 +167,19 @@ const MyCourses = ({courseData}) => {
 
                             </div>
                             <div className='py-2 mr-2 text-black text-sm font-medium' style={{ gridColumn: '2/3' }}>
-                                {courseData.courseCategory}
+                                Development
                             </div>
                             <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '3/4' }}>
                                 <button className='h-10 w-20 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
                                     <p className='text-black text-base font-normal'>Edit</p>
                                 </button>
                                 <button className='h-10 w-20 ml-1 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
-                                <p className='text-black text-base font-normal'>Discard</p>
+                                    <p className='text-black text-base font-normal'>Discard</p>
 
                                 </button>
                                 <button onClick={handlePublishButton}
-                                className='h-10 w-20 ml-1 shadow-md bg-slate-600 hover:opacity-50 rounded-sm'>
-                                <p className='text-white text-base font-normal'>Publish</p>
+                                    className='h-10 w-20 ml-1 shadow-md bg-slate-600 hover:opacity-50 rounded-sm'>
+                                    <p className='text-white text-base font-normal'>Publish</p>
 
                                 </button>
                             </div>

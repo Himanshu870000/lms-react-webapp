@@ -202,7 +202,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
 
         const newAssignment = {
             assignmentTitle,
-            lectureNotes: '',
+            assignmentPdf: '',
             sectionIndex, // Add sectionIndex to the lecture object
         };
 

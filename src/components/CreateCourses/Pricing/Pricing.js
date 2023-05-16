@@ -50,15 +50,15 @@ const Pricing = ({handleCourseCurrencyChange,handleCoursePriceChange,courseData}
     };
 
     console.log('courseData in  Pricing-->', courseData)
-    console.log('selectedCurrency--->', selectedCurrency)
-    console.log('selectedPrice----->', selectedPrice)
+    console.log('selectedCurrency--->', selectedCurrency.name)
+    console.log('selectedPrice----->', selectedPrice.name)
 
     const buttonClick = () => {
         // Create a new courseData object with updated fields
         const updatedCourseData = {
           ...courseData,
-          courseCurrency: selectedCurrency,
-          coursePrice: selectedPrice
+          courseCurrency: selectedCurrency.name,
+          coursePrice: selectedPrice.name
         };
       
         // Navigate to HomePage with the updated courseData
