@@ -31,7 +31,7 @@ export default function Signup(props) {
         }
     
         try {
-            const response = await axios.post('http://192.168.0.119:7000/api/signup', {
+            const response = await axios.post('http://192.168.0.109:7000/api/signup', {
                 name: name,
                 email: email,
                 password: password,

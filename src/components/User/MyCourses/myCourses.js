@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import courseDp from '../../../assets/instructorCourseCard.png'
 import axios from 'axios';
-import swal from 'sweetalert'
+import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
 
 
 const MyCourses = ({ courseData }) => {
 
     const [selectedOption, setSelectedOption] = useState("drafts");
+    const [publishingStatus, setPublishingStatus] = useState(false);
+
 
     const courseSection = courseData?.courseSection;
     const courseCategory = courseData?.courseCategory?.id;
 
     const token = useSelector(state => state.tokenReducer.token);
     console.log('tokaniya--->', token);
+
+
 
     const handlePublishButton = async () => {
         try {
@@ -89,9 +93,10 @@ const MyCourses = ({ courseData }) => {
             } else {
                 console.log('No token found.');
             }
+            setPublishingStatus(true);
 
             // Show success alert
-            swal.fire({
+            await Swal.fire({
                 title: 'Course Published Successfully',
                 text: 'Check in your active courses',
                 icon: 'success',
@@ -100,36 +105,55 @@ const MyCourses = ({ courseData }) => {
             // Reset the courseData state
         } catch (error) {
             console.error(error);
+
+            await Swal.fire({
+                title: 'Error',
+                text: 'An error occurred while publishing the course.',
+                icon: 'error',
+            });
         }
     };
 
 
 
 
+    const [coursesData, setCoursesData] = useState(null);
 
+    useEffect(() => {
+        const getUserDetails = async () => {
+            try {
+                const headers = {
+                    authorization: token,
+                };
 
-    // const [coursesData, setCoursesData] = useState([]);
-    // const category = 'your-category'; // Specify the category
+                const response = await axios.get('http://192.168.0.109:7000/api/getUserCDetails', {
+                    headers: headers,
+                });
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get('http://192.168.0.109:7000/api/getCourses', {
-    //                 params: {
-    //                     category: "64440452ef516a992da4046e",
-    //                 },
-    //             });
+                const courseIds = response.data.map((data) => data.courseData._id);
+                // courseIds is now an array of course IDs
+                // console.log('Course IDs:', courseIds);
+                // Now you can use the courseIds array as a parameter in the next API call
+                // For example:
+                const courseDataResponse = await axios.get('http://192.168.0.109:7000/api/getCourseData', {
+                    params: {
+                        courseIds: courseIds.join(',')
+                    }
+                });
 
-    //             setCoursesData(response.data.data);
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     };
+                const allCourseData = courseDataResponse.data;
+                // console.log('ALL', item)
+                // return item;
+                setCoursesData(allCourseData);
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
-    //     fetchData();
-    // }, [category]);
+        getUserDetails();
+    }, []);
 
-    // console.log("----->", coursesData)
+    console.log('coursessssssData------>', coursesData)
 
 
 
@@ -189,31 +213,34 @@ const MyCourses = ({ courseData }) => {
                             </div>
                         </div>
 
-                        <div className='grid grid-cols-4 rounded-lg h-32  mt-4' style={{ width: '130%' }}>
-                            <div className='flex flex-row py-2 text-black text-sm font-medium' style={{ gridColumn: '1/2' }}>
-                                <img className='w-20 h-20' src={courseDp} alt='' />
-                                <div className='flex flex-col sm:p-3 ml-1 mt-2 md:p-0'>
-                                    <p className='text-black font-bold text-sm'>Competitive programming:</p>
-                                    <p className='text-black font-bold text-sm'>Ultimate guide</p>
-                                    <p className='text-black font-normal text-xs'>10 Lectures, 28 Hours</p>
+                        {coursesData.map((course) => (
+                            <div key={course.id} className='grid grid-cols-4 rounded-lg h-32  mt-4' style={{ width: '130%' }}>
+
+                                <div className='flex flex-row py-2 text-black text-sm font-medium' style={{ gridColumn: '1/2' }}>
+                                    <img className='w-20 h-20' src={courseDp} alt='' />
+                                    <div className='flex flex-col sm:p-3 ml-1 mt-2 md:p-0'>
+                                        <p className='text-black font-bold text-sm'>{course.title} :</p>
+                                        <p className='text-black font-bold text-sm'>{course.courseLevel}</p>
+                                        <p className='text-black font-normal text-xs'>10 Lectures, 28 Hours</p>
+                                    </div>
                                 </div>
 
-                            </div>
 
+                                <div className='py-2 mr-2 text-black text-sm font-medium' style={{ gridColumn: '2/3' }}>
+                                    Development
+                                </div>
+                                <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '3/4' }}>
+                                    13 May, 23
+                                </div>
+                                <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '4/5' }}>
+                                    12
+                                </div>
+                                <div className='py-2 mr-12 text-black text-sm font-medium' style={{ gridColumn: '5/6' }}>
+                                    4.5
+                                </div>
+                            </div>
+                        ))}
 
-                            <div className='py-2 mr-2 text-black text-sm font-medium' style={{ gridColumn: '2/3' }}>
-                                Development
-                            </div>
-                            <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '3/4' }}>
-                                13 May, 23
-                            </div>
-                            <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '4/5' }}>
-                                12
-                            </div>
-                            <div className='py-2 mr-12 text-black text-sm font-medium' style={{ gridColumn: '5/6' }}>
-                                4.5
-                            </div>
-                        </div>
 
                     </div>
                 ) : (
@@ -230,7 +257,7 @@ const MyCourses = ({ courseData }) => {
                             </div>
                         </div>
 
-                        {courseData ? (
+                        {publishingStatus && (
                             <div className='grid grid-cols-3 rounded-lg h-32 mt-4' style={{ width: '130%' }}>
                                 <div className='flex flex-row py-2 text-black text-sm font-medium' style={{ gridColumn: '1/2' }}>
                                     <img className='w-20 h-20' src={courseData.courseImage} alt='' />
@@ -258,7 +285,7 @@ const MyCourses = ({ courseData }) => {
                                     </button>
                                 </div>
                             </div>
-                        ) : null}
+                        )}
 
 
                     </div>
