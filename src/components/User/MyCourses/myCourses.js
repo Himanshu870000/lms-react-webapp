@@ -2,64 +2,138 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import courseDp from '../../../assets/instructorCourseCard.png'
 import axios from 'axios';
+import swal from 'sweetalert'
+import { useSelector } from 'react-redux';
+
 
 const MyCourses = ({ courseData }) => {
 
     const [selectedOption, setSelectedOption] = useState("drafts");
 
+    const courseSection = courseData?.courseSection;
+    const courseCategory = courseData?.courseCategory?.id;
 
-    const courseSection = courseData.courseSection
-    console.log(courseData.CourseEnrollDeadline)
+    const token = useSelector(state => state.tokenReducer.token);
+    console.log('tokaniya--->', token);
 
     const handlePublishButton = async () => {
         try {
-          console.log('courseData in draft--->', courseData);
-      
-          // Iterate over the course sections
-          for (const section of courseSection) {
-            const { title, lecture, videos, assignment } = section;
-      
-            const sectionData = {
-              title,
-              description: 'section_description',
-              lecture,
-              videos,
-              assignment
+            console.log('courseData in draft--->', courseData);
+
+            const sectionDataPromises = [];
+
+            // Iterate over the course sections
+            for (const section of courseSection) {
+                const { title, lecture, videos, assignment } = section;
+
+                const sectionData = {
+                    title,
+                    description: 'section_description',
+                    lecture,
+                    videos,
+                    assignment
+                };
+
+                const sectionPromise = axios.post('http://192.168.0.109:7000/api/insertSection', sectionData);
+                sectionDataPromises.push(sectionPromise);
+            }
+
+            const sectionResponses = await Promise.all(sectionDataPromises);
+
+            const sections = sectionResponses.map(response => {
+                return {
+                    section: response.data._id
+                };
+            });
+
+            console.log('sections:', sections);
+
+            const { courseTitle, courseDescription, courseImage, courseCurrency, courseDemoVideo, courseStartDate, courseEndDate, CourseEnrollDeadline, courseLanguage, courseLevel, coursePrice } = courseData;
+
+            const courseDatas = {
+                title: courseTitle,
+                description: courseDescription,
+                courseImage,
+                category: courseCategory,
+                courseCurrency,
+                courseDemoVideo,
+                courseStartDate,
+                courseEndDate,
+                CourseEnrollDeadline,
+                courseLanguage,
+                courseLevel,
+                price: coursePrice,
+                sections
             };
-      
-            const response = await axios.post('http://192.168.0.137:7000/api/insertSection', sectionData);
+
+            const response = await axios.post('http://192.168.0.109:7000/api/insertCourses', courseDatas);
             console.log('Response:', response.data);
-            console.log('courseSectionId', response.data._id);
-      
-            // Add section ID to the section object
-            section.sectionId = response.data._id;
-          }
-      
-          const { courseTitle, courseDescription, courseImage, courseCategory, courseCurrency, courseDemoVideo, courseStartDate, courseEndDate, CourseEnrollDeadline, courseLanguage, courseLevel, coursePrice } = courseData;
-      
-          const courseDatas = {
-            courseTitle,
-            courseDescription,
-            courseImage,
-            courseCategory,
-            courseCurrency,
-            courseDemoVideo,
-            courseStartDate,
-            courseEndDate,
-            CourseEnrollDeadline,
-            courseLanguage,
-            courseLevel,
-            coursePrice,
-            courseSection
-          };
-      
-          const response = await axios.post('http://192.168.0.137:7000/api/insertCourses', courseDatas);
-          console.log('Response:', response.data);
+
+            const courseId = response.data._id; // Get the course ID from the response
+
+            console.log('tokennnn--', token);
+            if (token) {
+                const config = {
+                    headers: {
+                        authorization: token,
+                    },
+                };
+
+                const updateUserCourseResponse = await axios.put(
+                    'http://192.168.0.109:7000/api/updateUserCourse',
+                    { courseId },
+                    config
+                );
+
+                console.log('Update User Course Response:', updateUserCourseResponse.data);
+            } else {
+                console.log('No token found.');
+            }
+
+            // Show success alert
+            swal.fire({
+                title: 'Course Published Successfully',
+                text: 'Check in your active courses',
+                icon: 'success',
+            });
+
+            // Reset the courseData state
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
-      
+    };
+
+
+
+
+
+
+    // const [coursesData, setCoursesData] = useState([]);
+    // const category = 'your-category'; // Specify the category
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get('http://192.168.0.109:7000/api/getCourses', {
+    //                 params: {
+    //                     category: "64440452ef516a992da4046e",
+    //                 },
+    //             });
+
+    //             setCoursesData(response.data.data);
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     };
+
+    //     fetchData();
+    // }, [category]);
+
+    // console.log("----->", coursesData)
+
+
+
+
 
 
 
@@ -156,35 +230,37 @@ const MyCourses = ({ courseData }) => {
                             </div>
                         </div>
 
-                        <div className='grid grid-cols-3 rounded-lg h-32  mt-4' style={{ width: '130%' }}>
-                            <div className='flex flex-row py-2 text-black text-sm font-medium' style={{ gridColumn: '1/2' }}>
-                                <img className='w-20 h-20' src={courseData.courseImage} alt='' />
-                                <div className='flex flex-col sm:p-3 ml-1 mt-2 md:p-0'>
-                                    <p className='text-black font-bold text-sm'>{courseData.courseTitle}</p>
-                                    <p className='text-black font-bold text-sm'>{courseData.courseLevel}</p>
-                                    <p className='text-black font-normal text-xs'>8 Lectures, 28 Hours</p>
+                        {courseData ? (
+                            <div className='grid grid-cols-3 rounded-lg h-32 mt-4' style={{ width: '130%' }}>
+                                <div className='flex flex-row py-2 text-black text-sm font-medium' style={{ gridColumn: '1/2' }}>
+                                    <img className='w-20 h-20' src={courseData.courseImage} alt='' />
+                                    <div className='flex flex-col sm:p-3 ml-1 mt-2 md:p-0'>
+                                        <p className='text-black font-bold text-sm'>{courseData.courseTitle}</p>
+                                        <p className='text-black font-bold text-sm'>{courseData.courseLevel}</p>
+                                        <p className='text-black font-normal text-xs'>8 Lectures, 28 Hours</p>
+                                    </div>
                                 </div>
-
+                                <div className='py-2 mr-2 text-black text-sm font-medium' style={{ gridColumn: '2/3' }}>
+                                    {courseData.courseCategory.name}
+                                </div>
+                                <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '3/4' }}>
+                                    <button className='h-10 w-20 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
+                                        <p className='text-black text-base font-normal'>Edit</p>
+                                    </button>
+                                    <button className='h-10 w-20 ml-1 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
+                                        <p className='text-black text-base font-normal'>Discard</p>
+                                    </button>
+                                    <button
+                                        onClick={handlePublishButton}
+                                        className='h-10 w-20 ml-1 shadow-md bg-slate-600 hover:opacity-50 rounded-sm'
+                                    >
+                                        <p className='text-white text-base font-normal'>Publish</p>
+                                    </button>
+                                </div>
                             </div>
-                            <div className='py-2 mr-2 text-black text-sm font-medium' style={{ gridColumn: '2/3' }}>
-                                Development
-                            </div>
-                            <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '3/4' }}>
-                                <button className='h-10 w-20 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
-                                    <p className='text-black text-base font-normal'>Edit</p>
-                                </button>
-                                <button className='h-10 w-20 ml-1 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
-                                    <p className='text-black text-base font-normal'>Discard</p>
+                        ) : null}
 
-                                </button>
-                                <button onClick={handlePublishButton}
-                                    className='h-10 w-20 ml-1 shadow-md bg-slate-600 hover:opacity-50 rounded-sm'>
-                                    <p className='text-white text-base font-normal'>Publish</p>
 
-                                </button>
-                            </div>
-
-                        </div>
                     </div>
                 )}
             </div>

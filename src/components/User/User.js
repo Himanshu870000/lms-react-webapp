@@ -11,7 +11,8 @@ import Engagement from './Engagement/Engagement';
 import Messages from './Messages/Messages';
 import Announcement from './Announcement/Announcement';
 import DropIcon from '../../assets/dropDownIcon.png'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setToken } from '../../data/redux/token/actions';
 
 const HomePage = (props) => {
 
@@ -21,9 +22,9 @@ const HomePage = (props) => {
     //     setShowMenu(!showMenu);
     // };
 
-    const { token } = props;
+    const token = localStorage.getItem('token');
 
-    console.log('token---->', token)
+    // console.log('token---->', token)
 
     const location = useLocation();
     const courseData = location?.state?.courseData;
@@ -31,6 +32,12 @@ const HomePage = (props) => {
     const [activeMenu, setActiveMenu] = useState(initialActiveMenu);
       console.log('agyaHomepe---->',courseData)
     const [isOpen, setIsOpen] = useState(false);
+
+    const dispatch = useDispatch()
+    dispatch(setToken(token))
+
+    const tokens = useSelector(state => state.tokenReducer.token)
+    console.log('token--->', tokens)
 
     function toggleDropdown() {
         setIsOpen(!isOpen);

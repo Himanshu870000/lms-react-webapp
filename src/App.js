@@ -25,9 +25,13 @@ import Curiculum from './components/CreateCourses/Curiculum/Curiculum';
 import DemoVideo from './components/CreateCourses/DemoVideo/DemoVideo';
 import CourseAvail from './components/CreateCourses/CourseAvailablity/CourseAvail';
 import Pricing from './components/CreateCourses/Pricing/Pricing';
+import { Provider as StoreProvider } from "react-redux";
+import store from './data/redux/store'
+
 
 const App = () => {
   return (
+    <StoreProvider store={store}>
     <Router>
       <Routes>
         <Route path="/" element={<Navbar />} />
@@ -55,6 +59,8 @@ const App = () => {
         </Route>
       </Routes>
     </Router>
+    </StoreProvider>
+
   );
 };
 

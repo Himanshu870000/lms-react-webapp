@@ -37,6 +37,8 @@ const CourseHeader = ({ handleCourseCategoryChange, handleCourseImageChange, han
     const [isOpen1, setIsOpen1] = useState(false); // add isOpen state
 
 
+    
+
     function handleCategorySelect(category) {
 
 
@@ -74,7 +76,7 @@ const CourseHeader = ({ handleCourseCategoryChange, handleCourseImageChange, han
 
     const buttonClick = () => {
         handleMenuClick("CourseLanding");
-        handleCourseCategoryChange(selectedCategory.id)
+        handleCourseCategoryChange(selectedCategory)
         handleCourseTitleChange(courseTitle)
         handleCourseLevelChange(selectedLevel)
         handleCourseLanguageChange(selectedLanguage.name)
