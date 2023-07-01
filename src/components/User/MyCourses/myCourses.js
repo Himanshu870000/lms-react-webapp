@@ -153,7 +153,7 @@ const MyCourses = ({ courseData }) => {
 
 
         getUserDetails();
-    }, []);
+    });
 
 
     console.log('coursessssssData------>', coursesData)
