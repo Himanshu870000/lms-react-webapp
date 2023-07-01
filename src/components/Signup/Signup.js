@@ -29,9 +29,11 @@ export default function Signup(props) {
             });
             return;
         }
-    
+
+        console.log(name, email, password, type)
+
         try {
-            const response = await axios.post('http://192.168.0.109:7000/api/signup', {
+            const response = await axios.post('https://lmswebapp.onrender.com/api/signup', {
                 name: name,
                 email: email,
                 password: password,
@@ -55,13 +57,13 @@ export default function Signup(props) {
             });
         }
     };
-    
-    
+
+
     // Use Navigate to redirect to the login page when redirectToLogin is true
     if (redirectToLogin) {
         return <Navigate to="/Login" />;
     }
-    
+
 
     return (
         <div>
@@ -104,7 +106,9 @@ export default function Signup(props) {
                                 />
                                 <div className='mt-3'>
                                     <button
-                                        onClick={handleButtonClick}
+                                        onClick={() => {
+                                            handleButtonClick()
+                                        }}
                                         class="inline-block w-full px-6 py-3 mb-0 font-bold text-center hover:opacity-70 text-white uppercase align-middle transition-all border-0 rounded-full cursor-pointer hover:scale-102 active:opacity-85 hover:shadow-soft-xs bg-gradient-to-tl from-purple-700 to-pink-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25"
                                     >
                                         Signup

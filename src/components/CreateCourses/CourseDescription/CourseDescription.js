@@ -62,9 +62,9 @@ const CourseDescription = ({ handleMenuClick, handleCourseDemoVideoChange }) => 
                     <p className='ml-3 text-lg font-medium text-black'>New Course</p>
                 </Link>
                 <div className='flex items-center'>
-                    <button className='h-10 w-32 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
+                    {/* <button className='h-10 w-32 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
                         <p className='text-black text-base font-normal'>Save As Draft</p>
-                    </button>
+                    </button> */}
                     {/* <button className='h-10 w-32 shadow-md ml-1 bg-purple-500 hover:opacity-50 border-x-2 rounded-sm'>
                         <p className='text-white text-base font-normal'>Publish</p>
                     </button> */}
@@ -120,7 +120,9 @@ const CourseDescription = ({ handleMenuClick, handleCourseDemoVideoChange }) => 
 
                 <button
                     className='h-10 w-32 shadow-md bg-slate-900 hover:opacity-50 border-x-2 rounded-md'
-                    onClick={handleButtonClick}>Submit</button>
+                    onClick={handleButtonClick}>
+                   <p className='text-white font-medium'>Submit</p> 
+                    </button>
 
             </div>
 

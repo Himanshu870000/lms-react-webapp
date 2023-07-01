@@ -18,7 +18,11 @@ const MyCourses = ({ courseData }) => {
     const token = useSelector(state => state.tokenReducer.token);
     console.log('tokaniya--->', token);
 
-
+    const currentDate = new Date().toLocaleDateString(undefined, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      });
 
     const handlePublishButton = async () => {
         try {
@@ -38,7 +42,7 @@ const MyCourses = ({ courseData }) => {
                     assignment
                 };
 
-                const sectionPromise = axios.post('http://192.168.0.109:7000/api/insertSection', sectionData);
+                const sectionPromise = axios.post('https://lmswebapp.onrender.com/api/insertSection', sectionData);
                 sectionDataPromises.push(sectionPromise);
             }
 
@@ -70,7 +74,7 @@ const MyCourses = ({ courseData }) => {
                 sections
             };
 
-            const response = await axios.post('http://192.168.0.109:7000/api/insertCourses', courseDatas);
+            const response = await axios.post('https://lmswebapp.onrender.com/api/insertCourses', courseDatas);
             console.log('Response:', response.data);
 
             const courseId = response.data._id; // Get the course ID from the response
@@ -84,7 +88,7 @@ const MyCourses = ({ courseData }) => {
                 };
 
                 const updateUserCourseResponse = await axios.put(
-                    'http://192.168.0.109:7000/api/updateUserCourse',
+                    'https://lmswebapp.onrender.com/api/updateUserCourse',
                     { courseId },
                     config
                 );
@@ -122,36 +126,35 @@ const MyCourses = ({ courseData }) => {
     useEffect(() => {
         const getUserDetails = async () => {
             try {
+                console.log('tokenenenn-->', token);
                 const headers = {
                     authorization: token,
                 };
 
-                const response = await axios.get('http://192.168.0.109:7000/api/getUserCDetails', {
+                const response = await axios.get('https://lmswebapp.onrender.com/api/getUserCDetails', {
                     headers: headers,
                 });
 
                 const courseIds = response.data.map((data) => data.courseData._id);
-                // courseIds is now an array of course IDs
-                // console.log('Course IDs:', courseIds);
-                // Now you can use the courseIds array as a parameter in the next API call
-                // For example:
-                const courseDataResponse = await axios.get('http://192.168.0.109:7000/api/getCourseData', {
+                console.log('courseIds---->', response.data);
+
+                const courseDataResponse = await axios.get('https://lmswebapp.onrender.com/api/getCourseData', {
                     params: {
-                        courseIds: courseIds.join(',')
-                    }
+                        courseIds: courseIds.join(','),
+                    },
                 });
 
                 const allCourseData = courseDataResponse.data;
-                // console.log('ALL', item)
-                // return item;
                 setCoursesData(allCourseData);
             } catch (error) {
                 console.log(error);
             }
         };
 
+
         getUserDetails();
-    }, [token]);
+    }, []);
+
 
     console.log('coursessssssData------>', coursesData)
 
@@ -213,7 +216,7 @@ const MyCourses = ({ courseData }) => {
                             </div>
                         </div>
 
-                        {coursesData.map((course) => (
+                        {coursesData && coursesData.map((course) => (
                             <div key={course.id} className='grid grid-cols-4 rounded-lg h-32  mt-4' style={{ width: '130%' }}>
 
                                 <div className='flex flex-row py-2 text-black text-sm font-medium' style={{ gridColumn: '1/2' }}>
@@ -230,7 +233,7 @@ const MyCourses = ({ courseData }) => {
                                     Development
                                 </div>
                                 <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '3/4' }}>
-                                    13 May, 23
+                                {currentDate}
                                 </div>
                                 <div className='py-2 text-black text-sm font-medium' style={{ gridColumn: '4/5' }}>
                                     12
@@ -257,7 +260,7 @@ const MyCourses = ({ courseData }) => {
                             </div>
                         </div>
 
-                        {publishingStatus && (
+                        {!publishingStatus && courseData && (
                             <div className='grid grid-cols-3 rounded-lg h-32 mt-4' style={{ width: '130%' }}>
                                 <div className='flex flex-row py-2 text-black text-sm font-medium' style={{ gridColumn: '1/2' }}>
                                     <img className='w-20 h-20' src={courseData.courseImage} alt='' />

@@ -9,8 +9,6 @@ import swal from 'sweetalert'
 import HomePage from '../User/User'
 
 
-
-
 export default function Login() {
 
   const [email, setEmail] = useState('');
@@ -29,7 +27,7 @@ export default function Login() {
     }
   
     try {
-      const response = await axios.post('http://192.168.0.109:7000/api/signin', {
+      const response = await axios.post('https://lmswebapp.onrender.com/api/signin', {
         email: email,
         password: password,
       });

@@ -27,7 +27,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
     const [showAddLectureForm, setShowAddLectureForm] = useState(false);
     const [showAddVideosForm, setShowAddVideosForm] = useState(false);
     const [, setShowAddedLectureNotes] = useState(false)
-    const [, setShowAddedVideos] = useState(false)
+    // const [, setShowAddedVideos] = useState(false)
     const [showAddAssignmentForm, setShowAssignmentForm] =useState(false)
     const [assignmentTitle, setAssignmentTitle] = useState('')
     const [assignment, setAssignment] = useState([])
@@ -117,7 +117,6 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
     }, []);
 
     const [currentSectionIndex, setCurrentSectionIndex] = useState(null);
-
 
     const addLectureClickHandler = ( sectionIndex) => {
         setShowSelectType(true)
@@ -211,10 +210,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
         setShowAssignmentForm(false);
         setShowAddLectureButton(true);
         setShowSelectType(false);
-
     }
-
-
 
     const buttonClick = () => {
         console.log("courseSectionData---->", courseSectionData);
@@ -258,9 +254,9 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                     <p className='ml-3 text-lg font-medium text-black'>New Course</p>
                 </Link>
                 <div className='flex items-center'>
-                    <button className='h-10 w-32 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
+                    {/* <button className='h-10 w-32 shadow-md border-y-2 hover:opacity-50 border-x-2 rounded-sm'>
                         <p className='text-black text-base font-normal'>Save As Draft</p>
-                    </button>
+                    </button> */}
                     {/* <button className='h-10 w-32 shadow-md ml-1 bg-purple-500 hover:opacity-50 border-x-2 rounded-sm'>
                         <p className='text-white text-base font-normal'>Publish</p>
                     </button> */}
@@ -351,10 +347,6 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                         }
 
 
-
-
-
-
                         {showAddLectureButton && (
                             <button
                                 className="flex mt-5 ml-10 items-center justify-center bg-slate-300 hover:opacity-50 shadow-md rounded-lg h-14 w-40 border-y-2 border-x-2"
@@ -387,15 +379,15 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                                     </div>
                                     <div className="flex flex-row p-1">
                                         <Link onClick={handleAssignmentClick} className="text-purple-500 hover:opacity-60 font-medium">Assignment</Link>
-                                        <img className="p-1" src={assignmentIcon} alt="edit" />
+                                        <img className="p-1" src={assignmentIcon} alt="" />
                                     </div>
                                     <div className="flex flex-row p-1">
                                         <Link className="text-purple-500 hover:opacity-60 font-medium">Quizz</Link>
-                                        <img className="p-1" src={assignment} alt="edit" />
+                                        <img className="p-1" src={assignment} alt="" />
                                     </div>
                                     <div className="flex flex-row p-1">
                                         <Link className="text-purple-500 hover:opacity-60 font-medium">Live</Link>
-                                        <img className="p-1" src={live} alt="edit" />
+                                        <img className="p-1" src={live} alt="" />
                                     </div>
                                 </div>
                             </div>
