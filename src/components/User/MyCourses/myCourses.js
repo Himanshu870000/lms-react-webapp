@@ -56,21 +56,19 @@ const MyCourses = ({ courseData }) => {
 
             console.log('sections:', sections);
 
-            const { courseTitle, courseDescription, courseImage, courseCurrency, courseDemoVideo, courseStartDate, courseEndDate, CourseEnrollDeadline, courseLanguage, courseLevel, coursePrice } = courseData;
+            const { courseTitle, courseDescription, courseImage, courseDemoVideo, courseStartDate, courseEndDate, CourseEnrollDeadline, courseLanguage, courseLevel } = courseData;
 
             const courseDatas = {
                 title: courseTitle,
                 description: courseDescription,
                 courseImage,
                 category: courseCategory,
-                courseCurrency,
                 courseDemoVideo,
                 courseStartDate,
                 courseEndDate,
                 CourseEnrollDeadline,
                 courseLanguage,
                 courseLevel,
-                price: coursePrice,
                 sections
             };
 

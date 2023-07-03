@@ -9,12 +9,12 @@ import { useDispatch, } from "react-redux";
 import { setCategory } from '../../../data/redux/category/actions';
 
 const Categories = [
-    { id: '64440452ef516a992da4046a', name: 'IT & Software' },
-    { id: '64440452ef516a992da4046b', name: 'Bussiness' },
-    { id: '64440452ef516a992da4046c', name: 'Marketing' },
-    { id: '64440452ef516a992da4046f', name: 'development' },
-    { id: '64440452ef516a992da4046e', name: 'design' },
-    { id: '64440452ef516a992da4046d', name: 'Photography' },
+    { id: '64a1209f30ef2b9b70969b81', name: 'Montessori' },
+    { id: '64a1209f30ef2b9b70969b82', name: 'CBSE' },
+    { id: '64a1209f30ef2b9b70969b83', name: 'Unacademy' },
+    { id: '64a1209f30ef2b9b70969b84', name: 'Experiential Learning' },
+    { id: '64a1209f30ef2b9b70969b85', name: 'Life Skills' },
+    // { id: '64440452ef516a992da4046d', name: 'Photography' },
 ];
 
 

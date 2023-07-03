@@ -56,13 +56,13 @@ const Dashboard = () => {
                     <div class="grid grid-cols-1 md:grid-cols-4 h-32 max-w-full sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg bg-gray-200 rounded-lg">
                         <div className='ml-5 mt-5'>
                             <div className='flex flex-row'>
-                                <img className='w-16 h-6 md:w-20 md:h-8 mt-3' src={rupee} alt='' />
-                                <p className='text-purple-500 text-4xl mt-2 ml-1 font-medium'>15000</p>
+                                {/* <img className='w-16 h-6 md:w-20 md:h-8 mt-3' src={rupee} alt='' /> */}
+                                <p className='text-purple-500 text-4xl mt-2 ml-1 font-medium'>4.8</p>
                                 <img className='w-3 h-10 mt-2 md:ml-5' src={dashArrow} alt='' />
                             </div>
                             <div className='flex flex-row'>
                                 <p className='text-black text-xs mt-5 font-bold'>Total</p>
-                                <p className='text-black text-xs ml-1 mt-5 font-bold'>Earning</p>
+                                <p className='text-black text-xs ml-1 mt-5 font-bold'>Engagement</p>
                             </div>
                         </div>
                     </div>

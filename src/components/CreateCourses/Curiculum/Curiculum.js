@@ -353,7 +353,7 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                                 onClick={() => addLectureClickHandler(sectionIndex)}
                             >
                                 <p className="text-gray-600 text-xl font-medium">
-                                    <span className="mr-3 mt-2 text-4xl">+</span> Add Lecture
+                                    <span className="mr-1 mt-2 text-4xl">+</span> Add Content
                                 </p>
                             </button>
                         )}
@@ -369,10 +369,10 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                                 </div>
 
                                 <div className="flex flex-row justify-evenly items-center" style={{ width: 'calc(100% - 150px)' }}>
-                                    <div className="flex flex-row p-1">
+                                    {/* <div className="flex flex-row p-1">
                                         <Link onClick={handleClickLecture} className="text-purple-500 hover:opacity-60 font-medium">Lecture</Link>
                                         <img className="p-1" src={NoteIcon} alt="" />
-                                    </div>
+                                    </div> */}
                                     <div className="flex flex-row p-1">
                                         <Link onClick={handleVideosClick} className="text-purple-500 hover:opacity-60 font-medium">Videos</Link>
                                         <img className="p-1" src={videoIcon} alt="" />
@@ -381,14 +381,14 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                                         <Link onClick={handleAssignmentClick} className="text-purple-500 hover:opacity-60 font-medium">Assignment</Link>
                                         <img className="p-1" src={assignmentIcon} alt="" />
                                     </div>
-                                    <div className="flex flex-row p-1">
+                                    {/* <div className="flex flex-row p-1">
                                         <Link className="text-purple-500 hover:opacity-60 font-medium">Quizz</Link>
                                         <img className="p-1" src={assignment} alt="" />
                                     </div>
                                     <div className="flex flex-row p-1">
                                         <Link className="text-purple-500 hover:opacity-60 font-medium">Live</Link>
                                         <img className="p-1" src={live} alt="" />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 
@@ -424,11 +424,11 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                                         <input type="file" accept=".pdf" class="w-full px-4 py-2 rounded-md bg-white border-gray-400 border" placeholder="Browse PDF..." />
 
                                     </div>
-                                    <div class="w-1/2 pl-2">
+                                    {/* <div class="w-1/2 pl-2">
                                         <button class="bg-gray-700 hover:bg-gray-500 text-white px-4 py-2 rounded-md">
                                             Upload
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="flex justify-end p-10">
@@ -537,16 +537,16 @@ const Curiculum = ({ handleMenuClick, handleCourseSectionChange }) => {
                                     </p>
                                 </div>
 
-                                <div class="flex items-center mt-5 ml-10 justify-center" style={{ width: '130%' }}>
-                                    <div class="" style={{ width: '72%' }}>
-                                        <input type="file" accept=".pdf" class="w-full px-4 py-2 rounded-md bg-white border-gray-400 border" placeholder="Browse PDF..." />
+                                <div class="flex items-center mt-5 ml-10 justify-center" style={{ width: '87%' }}>
+                                    <div class="" style={{ width: '100%' }}>
+                                        <input type="file" accept=".pdf" class="w-full py-2 rounded-md bg-white " placeholder="Browse PDF..." />
 
                                     </div>
-                                    <div class="w-1/2 pl-2">
+                                    {/* <div class="w-1/2 pl-2">
                                         <button class="bg-gray-700 hover:bg-gray-500 text-white px-4 py-2 rounded-md">
                                             Upload
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="flex justify-end p-10">

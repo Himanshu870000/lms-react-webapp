@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import loginBack from '../../assets/loginBack.png'
-import Logo from '../../assets/logo.png'
 import google from '../../assets/google.png'
 import facebook from '../../assets/signUpFacebook.png'
 import axios from 'axios'
 import swal from 'sweetalert'
 import HomePage from '../User/User'
+import logo_harvest from '../../assets/logo_Harvest.png'
 
 
 export default function Login() {
@@ -76,7 +76,7 @@ export default function Login() {
             <Link to='/' className='text-xl text-black'>&#10006;</Link>
           </div>
           <div class="flex justify-end mt-4">
-            <img style={{ height: "80%", width: '10%' }} class="mx-auto" src={Logo} alt='' />
+            <img style={{ height: 50, width: 100}} class="mx-auto" src={logo_harvest} alt='' />
           </div>
           <p className=' text-center p-7 ml-5 text-2xl font-medium'>Login</p>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Logo from '../../assets/logo.png'
+// import Logo from '../../assets/logo.png'
 import dashDp from '../../assets/dashDP.png'
 import notification from '../../assets/notification.png'
 import chatIcon from '../../assets/chatIcon.png'
@@ -11,6 +11,7 @@ import CourseLanding from './CourseLanding/CourseLanding';
 import Curiculum from './Curiculum/Curiculum';
 import CourseAvail from './CourseAvailablity/CourseAvail';
 import Pricing from './Pricing/Pricing';
+import logo_harvest from '../../assets/logo_Harvest.png'
 
 const CreateCourses = () => {
 
@@ -167,7 +168,7 @@ const CreateCourses = () => {
                                 </svg>
                             </button>
                             <div className="flex items-center flex-shrink-0 text-purple-800 ml-16">
-                                <img className='w-24 h-8' src={Logo} alt='' />
+                                <img className='w-24 h-12' src={logo_harvest} alt='' />
                             </div>
                         </div>
 
@@ -301,12 +302,12 @@ const CreateCourses = () => {
                             </Link>
                         </li>
 
-                        <li>
+                        {/* <li>
                             <Link onClick={() => handleMenuClick("Pricing")}
                                 class={`flex items-center text-sm p-2 rounded-lg dark:text-white hover:text-purple-500 ${activeMenu === "Pricing" ? "text-purple-500" : "text-black"}`}>
                                 <span class="flex-1 ml-3 whitespace-nowrap">Pricing</span>
                             </Link>
-                        </li>
+                        </li> */}
 
                     </ul>
                 </div>
@@ -350,14 +351,13 @@ const CreateCourses = () => {
                                         handleCourseStartDateChange={handleCourseStartDateChange}
                                         handleCourseEndDateChange={handleCourseEndDateChange}
                                         handleCourseEnrollDeadlineChange={handleCourseEnrollDeadlineChange}
+                                        courseData={courseData} // Pass the courseData as a prop
                                     />;
                                 case "Pricing":
                                     return <Pricing
                                         handleMenuClick={handleMenuClick}
                                         handleCourseCurrencyChange={handleCourseCurrencyChange}
                                         handleCoursePriceChange={handleCoursePriceChange}
-                                        courseData={courseData} // Pass the courseData as a prop
-
                                     />;
                                 default:
                                     return null;

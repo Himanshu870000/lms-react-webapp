@@ -22,6 +22,7 @@ import Line from '../../assets/landingPageLine.png'
 import rupee from '../../assets/rupee.png'
 import { useMediaQuery } from '@mui/material';
 import { Link } from 'react-router-dom';
+import Logo_harvest from '../../assets/logo_Harvest.png'
 
 
 const Navbar = () => {
@@ -39,10 +40,10 @@ const Navbar = () => {
             <nav className="flex items-center shadow-md justify-between flex-wrap bg-white py-4 lg:px-12 border-solid border-t-2">
                 <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
                     <div className="flex items-center flex-shrink-0 text-purple-800 mr-16">
-                        <img src={Logo} alt='' />
+                        <img style={{height:70, width:140}} src={Logo_harvest} alt='' />
                     </div>
                     <input
-                        className="border-2 mt-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none "
+                        className="border-2 mt-5 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none "
                         type="search"
                         name="search"
                         placeholder="Search"
@@ -100,7 +101,7 @@ const Navbar = () => {
                     </div>
                     <div className="relative mx-auto text-gray-600 lg:block hidden">
                         <Link
-                            to="/SelectTypeLogin"
+                            to="/login"
                             className="bg-purple-500 hover:bg-purple-700 text-white font-bold mr-8 py-2 px-4 rounded"
                         >
                             Login

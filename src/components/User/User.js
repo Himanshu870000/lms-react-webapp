@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Logo from '../../assets/logo.png'
+// import Logo from '../../assets/logo.png'
 import dashDp from '../../assets/dashDP.png'
 import notification from '../../assets/notification.png'
 import chatIcon from '../../assets/chatIcon.png'
@@ -13,6 +13,7 @@ import Announcement from './Announcement/Announcement';
 import DropIcon from '../../assets/dropDownIcon.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from '../../data/redux/token/actions';
+import logo_harvest from '../../assets/logo_Harvest.png'
 
 const HomePage = (props) => {
 
@@ -61,7 +62,7 @@ const HomePage = (props) => {
                                 </svg>
                             </button>
                             <div className="flex items-center flex-shrink-0 text-purple-800 ml-16">
-                                <img className='w-24 h-8' src={Logo} alt='' />
+                                <img className='w-24 h-10' src={logo_harvest} alt='' />
                             </div>
                         </div>
 

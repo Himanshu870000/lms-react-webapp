@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Logo from '../../assets/logo.png'
+// import Logo from '../../assets/logo.png'
 import student from '../../assets/student.png'
 import instructor from '../../assets/Instructor.png'
+import logo_harvest from '../../assets/logo_Harvest.png'
 
 export default function SelectTypeLogin() {
     return (
@@ -12,11 +13,11 @@ export default function SelectTypeLogin() {
                     <Link to='/' className='text-xl text-black'>&#10006;</Link>
                 </div>
                 <div class="flex justify-end mt-4">
-                    <img class="mx-auto" src={Logo} alt='' />
+                    <img style={{height:80, width:160}} class="mx-auto" src={logo_harvest} alt='' />
                 </div>
-                <p className=' text-center p-7 ml-8 text-2xl font-medium'>Login as</p>
+                <p className=' text-center p-1 ml-85 text-2xl font-medium'>Login as</p>
                 <div className='flex justify-center items-center flex-row'>
-                    <Link to='/Login' class="flex mx-10 mt-4 hover:opacity-75">
+                    <Link to='/Login' class="flex mx-10 mt-6 hover:opacity-75">
                         <img style={{ height: 200, width: 200 }} class="mx-auto" src={student} alt='' />
                     </Link>
 

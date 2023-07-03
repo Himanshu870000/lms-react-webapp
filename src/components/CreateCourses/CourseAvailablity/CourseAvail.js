@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import backArrow from '../../../assets/arrow-narrow-left.png'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,18 +7,30 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 
 
-const CourseAvail = ({handleMenuClick, handleCourseStartDateChange, handleCourseEndDateChange, handleCourseEnrollDeadlineChange }) => {
+const CourseAvail = ({handleMenuClick, handleCourseStartDateChange, handleCourseEndDateChange, handleCourseEnrollDeadlineChange,courseData }) => {
 
     const [selectStartDate, setSelectStartDate] = useState(null);
     const [selectEndDate, setSelectEndDate] = useState(null);
     const [selectEnrollDeadline, setselectEnrollDeadline] = useState(null);
+    const navigate = useNavigate();
 
 
     const buttonClick = () => {
-        handleMenuClick('Pricing')
+        const updatedCourseData = {
+            ...courseData,
+            // courseCurrency: selectedCurrency.name,
+            // coursePrice: selectedPrice.name
+            courseStartDate: selectStartDate,
+            courseEndDate: selectEndDate,
+            CourseEnrollDeadline: selectEnrollDeadline,
+
+          };
         handleCourseStartDateChange(selectStartDate)
         handleCourseEndDateChange(selectEndDate)
         handleCourseEnrollDeadlineChange(selectEnrollDeadline)
+
+        // Navigate to HomePage with the updated courseData
+        navigate('/homepage', { state: { courseData: updatedCourseData, activeMenu: "myCourses" } });
     }
 
     return (
