@@ -166,15 +166,11 @@ const Navbar = () => {
                             <p class=" text-start ml-4 font-bold">User Experience (UX) :</p>
                             <p class=" text-start ml-4 font-bold">For beginners</p>
                             <p class=" text-start ml-4 font-light">course start Date</p>
-                            <p class=" text-start ml-4 font-light">4.5 ⭐⭐⭐⭐</p>
 
                             <div class="flex  flex-row">
+                            <p class=" text-start ml-4 font-light">4.5 ⭐⭐⭐⭐</p>
 
-                                <div class=" mx-4">
-                                    <img style={{ height: 20, width: 20, marginTop: 8 }} src={rupee} alt='' class="" />
-                                </div>
-                                <p class=" text-start mt-2 font-light"> 3999</p>
-                                <button class="bg-purple-500 ml-36 mb-8 p-1 hover:bg-purple-700 text-white rounded">
+                                <button class="bg-purple-500 ml-20 mb-12 p-1 hover:bg-purple-700 text-white rounded">
                                     View
                                 </button>
                             </div>
@@ -182,41 +178,33 @@ const Navbar = () => {
                     </div>
 
                     <div class="flex flex-col w-72 justify-center mt-20 mx-5 rounded bg-white overflow-hidden shadow-lg">
-                        <img class="h-36 w-72 p-4" src={courseCard2} alt="Sunset in the mountains"></img>
+                        <img class="h-36 w-72 p-4" src={courseCard} alt="Sunset in the mountains"></img>
                         <div class="">
                             <p class=" text-start ml-4 font-bold">User Experience (UX) :</p>
                             <p class=" text-start ml-4 font-bold">For beginners</p>
                             <p class=" text-start ml-4 font-light">course start Date</p>
-                            <p class=" text-start ml-4 font-light">4.5 ⭐⭐⭐⭐</p>
 
                             <div class="flex  flex-row">
+                            <p class=" text-start ml-4 font-light">4.5 ⭐⭐⭐⭐</p>
 
-                                <div class=" mx-4">
-                                    <img style={{ height: 20, width: 20, marginTop: 8 }} src={rupee} alt='' class="" />
-                                </div>
-                                <p class=" text-start mt-2 font-light"> 3999</p>
-                                <button class="bg-purple-500 ml-36 mb-8 p-1 hover:bg-purple-700 text-white rounded">
+                                <button class="bg-purple-500 ml-20 mb-12 p-1 hover:bg-purple-700 text-white rounded">
                                     View
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex flex-col w-72 justify-center mt-20  mx-5 rounded bg-white overflow-hidden shadow-lg">
+                    <div class="flex flex-col w-72 justify-center mt-20 mx-5 rounded bg-white overflow-hidden shadow-lg">
                         <img class="h-36 w-72 p-4" src={courseCard} alt="Sunset in the mountains"></img>
                         <div class="">
                             <p class=" text-start ml-4 font-bold">User Experience (UX) :</p>
                             <p class=" text-start ml-4 font-bold">For beginners</p>
                             <p class=" text-start ml-4 font-light">course start Date</p>
-                            <p class=" text-start ml-4 font-light">4.5 ⭐⭐⭐⭐</p>
 
                             <div class="flex  flex-row">
+                            <p class=" text-start ml-4 font-light">4.5 ⭐⭐⭐⭐</p>
 
-                                <div class=" mx-4">
-                                    <img style={{ height: 20, width: 20, marginTop: 8 }} src={rupee} alt='' class="" />
-                                </div>
-                                <p class=" text-start mt-2 font-light"> 3999</p>
-                                <button class="bg-purple-500 ml-36 mb-8 p-1 hover:bg-purple-700 text-white rounded">
+                                <button class="bg-purple-500 ml-20 mb-12 p-1 hover:bg-purple-700 text-white rounded">
                                     View
                                 </button>
                             </div>
