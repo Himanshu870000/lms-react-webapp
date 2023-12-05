@@ -1,6 +1,6 @@
 /**
  * Author : Himanshu Tripathi
- * description: entry point for the react  WebApp
+ * description: entry point for the react WebApp
  */
 
 import React from 'react';
@@ -9,57 +9,26 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Navbar from './components/LandingPage/LandingPage';
 import HomePage from './components/User/User';
-import SelectTypeLogin from './components/Login/SelectType';
 import SelectTypeSignup from './components/Signup/SelectType';
-import Dashboard from './components/User/Dashboard/Dashboard';
-import MyCourses from './components/User/MyCourses/myCourses';
-import Revenue from './components/User/Revenue/Revenue';
-import Announcement from './components/User/Announcement/Announcement';
-import Engagement from './components/User/Engagement/Engagement';
-import UserActivity from './components/User/UserActivity/UserActivity';
-import CreateCourses from './components/CreateCourses/CreateCourse';
-import CourseDescription from './components/CreateCourses/CourseDescription/CourseDescription';
-import CourseHeader from './components/CreateCourses/CourseHeader/CourseHeader';
-import CourseLanding from './components/CreateCourses/CourseLanding/CourseLanding';
-import Curiculum from './components/CreateCourses/Curiculum/Curiculum';
-import DemoVideo from './components/CreateCourses/DemoVideo/DemoVideo';
-import CourseAvail from './components/CreateCourses/CourseAvailablity/CourseAvail';
-import Pricing from './components/CreateCourses/Pricing/Pricing';
-import { Provider as StoreProvider } from "react-redux";
-import store from './data/redux/store'
+// import { Provider as StoreProvider } from "react-redux";
+import Home from './components/Home/home';
 
 
 const App = () => {
   return (
-    <StoreProvider store={store}>
+    // <StoreProvider store={store}>
     <Router>
       <Routes>
-        <Route path="/" element={<Navbar />} />
+          <Route path="/" element={<Navbar />} />
+          <Route path='/home' element={<Home/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/SelectTypeLogin" element={<SelectTypeLogin />} />
         <Route path="/SelectTypeSignup" element={<SelectTypeSignup />} />
         <Route path="/HomePage" element={<HomePage />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path='MyCourses' element={<MyCourses />} />
-          <Route path='Revenue' element={<Revenue />} />
-          <Route path='Announcement' element={<Announcement />} />
-          <Route path='Engagement' element={<Engagement />} />
-          <Route path='Messages' element={<postMessage />} />
-          <Route path='UserActivity' element={<UserActivity />} />
-        </Route>
-        <Route path='/CreateCourses' element={<CreateCourses/>}>
-          <Route path='CourseDescription' element={<CourseDescription/>}/>
-          <Route path='CourseHeader' element={<CourseHeader/>}/>
-          <Route path='CourseLanding' element={<CourseLanding/>}/>
-          <Route path='Curiculum' element={<Curiculum/>}/>
-          <Route path='DemoVideo' element={<DemoVideo/>}/>
-          <Route path='CourseAvailablity' element={<CourseAvail/>}/>
-          <Route path='Pricing' element={<Pricing/>}/>
         </Route>
       </Routes>
     </Router>
-    </StoreProvider>
+    // </StoreProvider>
 
   );
 };
